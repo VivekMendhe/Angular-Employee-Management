@@ -1,0 +1,149 @@
+<div
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+  (click)="closeForm($event)"
+>
+  <div
+    class="relative bg-white p-8 rounded-lg shadow-lg w-1/3"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      (click)="closeForm($event)"
+      class="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-900"
+    >
+      &times;
+    </button>
+    <!-- <h2 class="text-xl font-bold mb-6 text-center">Intern Details</h2> -->
+    <h2 class="text-xl font-bold mb-6 text-center">
+      {{ intern ? "Edit Intern Details" : "Intern Details" }}
+    </h2>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-4 flex justify-between items-center">
+        <label for="name" class="block text-sm font-medium text-gray-700"
+          >Name -</label
+        >
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="enrollForm.name"
+          name="name"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+      <div class="mb-4 flex justify-between items-center">
+        <label for="email" class="block text-sm font-medium text-gray-700"
+          >Email -</label
+        >
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="enrollForm.email"
+          name="email"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+      <div class="mb-4 flex justify-between items-center">
+        <label for="city" class="block text-sm font-medium text-gray-700"
+          >City -</label
+        >
+        <select
+          id="city"
+          [(ngModel)]="enrollForm.city"
+          name="city"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        >
+          <option value="" disabled>Select a city</option>
+          <option value="New York">New York</option>
+          <option value="Los Angeles">Los Angeles</option>
+          <option value="Chicago">Chicago</option>
+        </select>
+      </div>
+      <div class="mb-4 flex justify-between items-center">
+        <label for="college" class="block text-sm font-medium text-gray-700"
+          >College -</label
+        >
+        <input
+          type="text"
+          id="college"
+          [(ngModel)]="enrollForm.college"
+          name="college"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+      <div class="mb-4 flex justify-between items-center">
+        <label for="contact" class="block text-sm font-medium text-gray-700"
+          >Contact -</label
+        >
+        <input
+          type="text"
+          id="contact"
+          [(ngModel)]="enrollForm.contact"
+          name="contact"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+      <!-- Batch field, only for mentors -->
+      @if (isMentor) {
+      <div class="mb-4 flex justify-between items-center">
+        <label for="batch" class="block text-sm font-medium text-gray-700"
+          >Batch -</label
+        >
+
+        <select
+          id="batch"
+          [(ngModel)]="enrollForm.batchID"
+          name="batchID"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        >
+          <option value="" disabled>Select a batch</option>
+          @for (item of batches; track $index) {
+          <option [value]="item.batchID">Batch {{ item.batchID }}</option>
+          }
+        </select>
+      </div>
+      }
+
+      <!-- Type and Remark fields, only for editing -->
+      @if (intern) {
+      <div>
+        <div class="mb-4 flex justify-between items-center">
+          <label for="type" class="block text-sm font-medium text-gray-700"
+            >Type -</label
+          >
+          <input
+            type="text"
+            id="type"
+            [(ngModel)]="enrollForm.type"
+            name="type"
+            class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+        <div class="mb-4 flex justify-between items-center">
+          <label for="remark" class="block text-sm font-medium text-gray-700"
+            >Remark -</label
+          >
+          <input
+            type="text"
+            id="remark"
+            [(ngModel)]="enrollForm.remark"
+            name="remark"
+            class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+      </div>
+      }
+      <button
+        type="submit"
+        class="w-full bg-green-400 text-white p-2 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+      >
+        Save
+      </button>
+    </form>
+  </div>
+</div>

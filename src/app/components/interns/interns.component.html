@@ -1,0 +1,89 @@
+<div class="container mx-auto p-4 h-full bg-[#e6f7e6]">
+  <div class="flex flex-col items-center justify-center bg-[#e6f7e6]">
+    <div class="w-[80%] bg-white p-4 rounded-lg shadow-md">
+      <div class="min-w-full border-collapse rounded-lg">
+        <div>
+          <div class="flex justify-between p-2 rounded-t-lg">
+            <p class="w-1/6 text-center">Name</p>
+            <p class="w-1/6 text-center">Email</p>
+            <p class="w-1/6 text-center">Contact</p>
+            <p class="w-1/6 text-center">Type</p>
+            <p class="w-1/6 text-center">Remarks</p>
+            <p class="w-1/6 text-center">Edit</p>
+          </div>
+        </div>
+        <div class="rounded-sm">
+          <!-- Replace with actual data using Angular's *ngFor -->
+          <!-- Example row -->
+          @for (item of interns; track $index) {
+          <div class="flex justify-between rounded-t-md rounded-b-md">
+            <p class="border border-black p-2 w-1/6 text-center">
+              {{ item.name }}
+            </p>
+            <p class="border border-black p-2 w-1/6 text-center">
+              {{ item.email }}
+            </p>
+            <p class="border border-black p-2 w-1/6 text-center">
+              {{ item.contact }}
+            </p>
+            <p class="border border-black p-2 w-1/6 text-center">
+              @if (item.type==null) { -- }
+              {{ item.type }}
+            </p>
+            <p class="border border-black p-2 w-1/6 text-center">
+              @if (item.remark==null) { -- }
+              {{ item.remark }}
+            </p>
+            <p class="border border-black p-2 w-1/6 text-center">
+              <button
+                class="text-blue-500 hover:text-blue-700"
+                (click)="editIntern(item)"
+              >
+                ✏️
+              </button>
+            </p>
+          </div>
+          }
+          <!-- Repeat for other intern entries -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Intern Button -->
+    <!-- (click)="showAddBatchForm = true" -->
+    <div class="flex justify-end mt-4 mb-4 w-[80%]">
+      <button
+        class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+        (click)="openAddForm()"
+      >
+        ADD INTERN
+      </button>
+    </div>
+  </div>
+
+  <!-- Add Batch Form Modal -->
+  <!-- (formClosed)="showAddBatchForm = false" -->
+  @if (showAddBatchForm) {
+  <div>
+    <app-intern-form
+      [isMentor]="isMentor"
+      (formClosed)="closeForm()"
+      (internAdded)="addIntern($event)"
+    ></app-intern-form>
+  </div>
+
+  }
+
+  <!-- Edit Intern Form Modal -->
+  <!-- (formClosed)="showEditForm = false" -->
+  @if (showEditForm) {
+  <div>
+    <app-intern-form
+      [isMentor]="isMentor"
+      [intern]="currentIntern"
+      (formClosed)="closeForm()"
+      (internUpdated)="updateIntern($event)"
+    ></app-intern-form>
+  </div>
+  }
+</div>

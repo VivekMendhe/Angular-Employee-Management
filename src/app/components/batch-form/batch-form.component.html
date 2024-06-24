@@ -1,0 +1,79 @@
+<div
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+  (click)="closeForm()"
+>
+  <div
+    class="relative bg-white p-8 rounded-lg shadow-lg w-1/3"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      (click)="closeForm()"
+      class="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-900"
+    >
+      &times;
+    </button>
+    <h2 class="text-xl font-semibold mb-4 text-center">Batch Details</h2>
+    <form (ngSubmit)="submitForm()">
+      <div class="mb-4 flex justify-between items-center">
+        <label class="block text-sm font-medium text-gray-700" for="title"
+          >Title -</label
+        >
+        <input
+          id="title"
+          type="text"
+          [(ngModel)]="newBatch.title"
+          name="title"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div class="mb-4 flex justify-between items-center">
+        <label class="block text-sm font-medium text-gray-700" for="createdOn"
+          >Created On -</label
+        >
+        <input
+          id="createdOn"
+          type="date"
+          [(ngModel)]="newBatch.createdOn"
+          name="createdOn"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div class="mb-4 flex justify-between items-center">
+        <label class="block text-sm font-medium text-gray-700" for="duration"
+          >Duration -</label
+        >
+        <input
+          id="duration"
+          type="text"
+          [(ngModel)]="newBatch.duration"
+          name="duration"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div class="mb-4 flex justify-between items-center">
+        <label class="block text-sm font-medium text-gray-700" for="description"
+          >Description -</label
+        >
+        <textarea
+          id="description"
+          [(ngModel)]="newBatch.description"
+          name="description"
+          class="mt-1 p-2 w-80 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+      >
+        Save
+      </button>
+    </form>
+  </div>
+</div>

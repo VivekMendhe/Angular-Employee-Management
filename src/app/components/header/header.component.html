@@ -1,0 +1,39 @@
+<div
+  class="h-16 bg-gray-800 text-white text-2xl flex items-center justify-start p-4"
+>
+  @if (showHomeLink) {
+  <ng-container>
+    <a
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="px-4 py-2 mr-8"
+      >Home</a
+    >
+  </ng-container>
+  } @else if (isMentor) {
+  <ng-container>
+    <a
+      routerLink="/mentor/batches"
+      routerLinkActive="active-link"
+      class="px-4 py-2 mr-8"
+      >Batches</a
+    >
+    <a
+      routerLink="/mentor/interns"
+      routerLinkActive="active-link"
+      class="px-4 py-2 mr-8"
+      >Interns</a
+    >
+  </ng-container>
+  } @else if (isIntern) {
+  <ng-container>
+    <a
+      routerLink="/intern/dashboard"
+      routerLinkActive="active-link"
+      class="px-4 py-2 mr-8"
+      >My Dashboard</a
+    >
+  </ng-container>
+  }
+</div>

@@ -1,0 +1,47 @@
+/* Adjust these styles as needed */
+
+.container {
+  background-color: #e6f7e6;
+  height: calc(100vh - 64px);
+}
+
+/* button {
+  background-color: #b3e6b3;
+}
+
+button:hover {
+  background-color: #99cc99;
+} */
+
+label {
+  font-weight: bold;
+}
+
+input,
+select {
+  background-color: #ffffff;
+}
+
+button[type="submit"] {
+  background-color: #99cc99;
+}
+
+button[type="submit"]:hover {
+  background-color: #80b380;
+}
+
+.bg-green-100 {
+  background-color: #e6f7e6;
+}
+
+.bg-green-400 {
+  background-color: #99cc99;
+}
+
+.bg-green-500 {
+  background-color: #80b380;
+}
+
+.focus\:ring-green-400:focus {
+  --tw-ring-color: #99cc99;
+}

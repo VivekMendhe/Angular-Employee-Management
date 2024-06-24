@@ -1,0 +1,10 @@
+.active-link {
+  font-weight: bold; /* Example: Highlight active link with bold font */
+  color: #ffcc00; /* Example: Yellow color for active link */
+}
+
+.active-link-mentor {
+  color: white;
+  border: green 1px solid;
+  border-radius: 5px;
+}

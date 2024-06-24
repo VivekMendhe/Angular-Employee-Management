@@ -1,0 +1,62 @@
+<div
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+>
+  <div class="relative bg-white p-8 rounded-lg shadow-lg w-96">
+    <button
+      (click)="close.emit()"
+      class="absolute text-2xl top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-green-400"
+    >
+      &times;
+    </button>
+    <h2 class="text-2xl font-bold mb-6 text-center">
+      {{ userType | titlecase }} Login
+    </h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700"
+          >Username</label
+        >
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="username"
+          class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+      </div>
+      <div class="mb-4 relative">
+        <label for="password" class="block text-sm font-medium text-gray-700"
+          >Password</label
+        >
+        <input
+          #passwordInput
+          [type]="passwordVisible ? 'text' : 'password'"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        @if (password.length > 0) {
+        <button
+          type="button"
+          (click)="togglePasswordVisibility()"
+          class="absolute inset-y-3 right-0 pr-3 flex items-center justify-center h-full text-sm leading-5"
+        >
+          @if (!passwordVisible) {
+          <img src="/icons/hidden.png" alt="Show password" class="h-5 w-5" />
+
+          }@else if (passwordVisible) {
+          <img src="/icons/eye.png" alt="Hide password" class="h-5 w-5" />
+          }
+        </button>
+        }
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
