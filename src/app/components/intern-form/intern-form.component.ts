@@ -26,15 +26,6 @@ export class InternFormComponent {
   @Input() intern: Intern | null = null;
   @Output() internUpdated = new EventEmitter<Intern>();
 
-  // enrollForm = {
-  //   name: '',
-  //   college: '',
-  //   email: '',
-  //   city: '',
-  //   contact: '',
-  //   batchID: null,
-  // };
-
   enrollForm: Intern = {
     name: '',
     college: '',
@@ -76,22 +67,6 @@ export class InternFormComponent {
     event.stopPropagation();
   }
 
-  // onSubmit() {
-  //   this.internAdded.emit({ ...this.enrollForm });
-  //   this.resetForm();
-  //   this.closeForm(new MouseEvent('click'));
-  // }
-
-  // onSubmit() {
-  //   if (this.intern) {
-  //     this.internUpdated.emit({ ...this.enrollForm });
-  //   } else {
-  //     this.internAdded.emit({ ...this.enrollForm });
-  //   }
-  //   this.resetForm();
-  //   this.closeForm(new MouseEvent('click'));
-  // }
-
   onSubmit() {
     const internData = this.intern
       ? { ...this.enrollForm }
@@ -113,16 +88,6 @@ export class InternFormComponent {
     this.closeForm(new MouseEvent('click'));
   }
 
-  // resetForm() {
-  //   this.enrollForm = {
-  //     name: '',
-  //     college: '',
-  //     email: '',
-  //     city: '',
-  //     contact: '',
-  //     batchID: null,
-  //   };
-  // }
   resetForm() {
     this.enrollForm = {
       name: '',

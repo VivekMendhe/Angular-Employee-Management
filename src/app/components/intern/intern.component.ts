@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { InternFormComponent } from '../intern-form/intern-form.component';
 import { Intern } from '../../types/intern';
 import { InternService } from '../../services/intern.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-intern',
@@ -15,7 +16,14 @@ export class InternComponent {
   showEnrollForm: boolean = false;
   interns: Intern[] = [];
 
-  constructor(private internService: InternService) {}
+  page: number = 1;
+  limit: number = 10;
+  loading: boolean = false;
+
+  constructor(
+    private internService: InternService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getInterns();
@@ -23,7 +31,12 @@ export class InternComponent {
 
   getInterns(): void {
     this.internService.getInterns().subscribe((data) => {
-      this.interns = data;
+      this.interns = data.slice().sort((a, b) => {
+        if (a.id !== undefined && b.id !== undefined) {
+          return b.id - a.id;
+        }
+        return 0;
+      });
     });
   }
 
@@ -35,29 +48,24 @@ export class InternComponent {
     this.showEnrollForm = false;
   }
 
-  // addIntern(newIntern: Intern) {
-  //   this.interns.unshift(newIntern);
-  //   this.closeEnrollForm();
-  // }
-
-  // addIntern(newIntern: Intern) {
-  //   this.internService.addIntern(newIntern).subscribe((intern) => {
-  //     this.interns.unshift(intern);
-  //     this.closeEnrollForm();
-  //   });
-  // }
-
-  // addIntern(newIntern: Omit<Intern, 'batchID' | 'type' | 'remark'>) {
-  //   this.internService.addIntern(newIntern).subscribe((intern) => {
-  //     this.interns.unshift(intern);
-  //     this.closeEnrollForm();
-  //   });
-  // }
-
   addIntern(newIntern: Partial<Intern>) {
-    this.internService.addIntern(newIntern).subscribe((intern) => {
-      this.interns.unshift(intern);
-      this.closeEnrollForm();
+    this.internService.addIntern(newIntern).subscribe({
+      next: (intern) => {
+        this.interns.unshift(intern);
+        this.closeEnrollForm();
+        this.showToast('Intern added successfully!', 'success-toast');
+      },
+      error: () => {
+        this.showToast('Failed to add intern.', 'error-toast');
+      },
+    });
+  }
+
+  showToast(message: string, panelClass: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      panelClass: [panelClass],
     });
   }
 }

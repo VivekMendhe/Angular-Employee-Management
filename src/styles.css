@@ -3,6 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #e6f7e6;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* styles.css */
+.mat-snack-bar-container.success-toast {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.mat-snack-bar-container.error-toast {
+  background-color: #f44336; /* Red */
+  color: white;
 }

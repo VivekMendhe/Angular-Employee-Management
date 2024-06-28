@@ -9,6 +9,9 @@ import { InternComponent } from './components/intern/intern.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +26,9 @@ import { FormsModule } from '@angular/forms';
     InternComponent,
     HeaderComponent,
     FormsModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

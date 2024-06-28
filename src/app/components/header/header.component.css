@@ -1,10 +1,19 @@
-.active-link {
-  font-weight: bold; /* Example: Highlight active link with bold font */
-  color: #ffcc00; /* Example: Yellow color for active link */
+.header-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.active-link-mentor {
+.header-link {
+  padding: 0.5rem 1rem;
+  margin-right: 2rem;
+  text-decoration: none;
   color: white;
-  border: green 1px solid;
-  border-radius: 5px;
+}
+
+.header-link:last-child {
+  margin-right: 0;
+}
+
+.header-link.active-link {
+  border-bottom: 2px solid white;
 }

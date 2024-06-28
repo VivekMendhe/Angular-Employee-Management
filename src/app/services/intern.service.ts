@@ -11,16 +11,6 @@ export class InternService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // addIntern(intern: Intern): Observable<Intern> {
-  //   return this.httpClient.post<Intern>(this.baseUrl, intern);
-  // }
-
-  // addIntern(
-  //   intern: Omit<Intern, 'batchID' | 'type' | 'remark'>
-  // ): Observable<Intern> {
-  //   return this.httpClient.post<Intern>(this.baseUrl, intern);
-  // }
-
   addIntern(intern: Partial<Intern>): Observable<Intern> {
     return this.httpClient.post<Intern>(this.baseUrl, intern);
   }

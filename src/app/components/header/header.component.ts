@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   NavigationEnd,
   Router,
@@ -17,8 +18,9 @@ export class HeaderComponent {
   isMentor = false;
   isIntern = false;
   showHomeLink = false;
+  showLogoutButton = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private snackBar: MatSnackBar) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateHeader();
@@ -29,6 +31,7 @@ export class HeaderComponent {
   updateHeader() {
     const currentUrl = this.router.url;
     this.showHomeLink = currentUrl === '/';
+    this.showLogoutButton = !currentUrl.includes('/login');
     if (currentUrl.includes('/mentor')) {
       this.isMentor = true;
       this.isIntern = false;
@@ -38,6 +41,22 @@ export class HeaderComponent {
     } else {
       this.isMentor = false;
       this.isIntern = false;
+      this.showLogoutButton = false;
     }
+  }
+
+  logout() {
+    this.isMentor = false;
+    this.isIntern = false;
+    this.showLogoutButton = false;
+    this.router.navigate(['/']);
+    this.showToast('Logged out successfully');
+  }
+
+  showToast(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+    });
   }
 }

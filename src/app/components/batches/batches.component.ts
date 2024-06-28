@@ -1,39 +1,36 @@
 import { Component } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BatchFormComponent } from '../batch-form/batch-form.component';
 import { Batch } from '../../types/batch';
 import { BatchService } from '../../services/batch.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-batches',
   standalone: true,
   imports: [FormsModule, BatchFormComponent],
   templateUrl: './batches.component.html',
-  styleUrl: './batches.component.css',
+  styleUrls: ['./batches.component.css'],
 })
 export class BatchesComponent {
   showAddBatchForm: boolean = false;
-  shownDescriptionIndex: number | null = null; // Track the shown description index
-
   batches: Batch[] = [];
+  expandedBatchIds: Set<number> = new Set<number>();
 
-  constructor(private batchService: BatchService) {}
+  constructor(
+    private batchService: BatchService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getBatches();
   }
 
   getBatches(): void {
-    this.batchService.getBatches().subscribe((data) => {
+    this.batchService.getBatches().subscribe((data: Batch[]) => {
       this.batches = data;
     });
   }
-
-  // getBatches(): void {
-  //   this.batchService.getBatches().subscribe((data) => {
-  //     this.batches = data.map((item) => ({ ...item, isExpanded: false }));
-  //   });
-  // }
 
   openAddBatchForm() {
     this.showAddBatchForm = true;
@@ -43,46 +40,30 @@ export class BatchesComponent {
     this.showAddBatchForm = false;
   }
 
-  // addBatch(newBatch: any) {
-  //   this.batches.push(newBatch);
-  //   this.showAddBatchForm = false;
-  // }
-
   addBatch(newBatch: Batch) {
     this.batchService.addBatch(newBatch).subscribe((batch) => {
       this.batches.push(batch);
       this.showAddBatchForm = false;
+      this.showToast('Batch added successfully!');
     });
   }
 
-  toggleDescription(index: number) {
-    this.shownDescriptionIndex =
-      this.shownDescriptionIndex === index ? null : index;
+  toggleDescription(batchId: number) {
+    if (this.expandedBatchIds.has(batchId)) {
+      this.expandedBatchIds.delete(batchId);
+    } else {
+      this.expandedBatchIds.add(batchId);
+    }
+  }
+
+  isExpanded(batchId: number): boolean {
+    return this.expandedBatchIds.has(batchId);
+  }
+
+  showToast(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+    });
   }
 }
-
-// batches = [
-//   {
-//     id: 1,
-//     title: 'Frontend Project',
-//     description: 'Dive into the fundamentals of HTML, CSS, and JavaScript.',
-//   },
-//   {
-//     id: 2,
-//     title: 'Frontend Framework exploration',
-//     description:
-//       'Explore modern frameworks like Bootstrap and React for front-end development.',
-//   },
-//   {
-//     id: 3,
-//     title: 'DSA',
-//     description:
-//       'Dive into machine learning algorithms and their applications in real-world scenarios.',
-//   },
-//   {
-//     id: 4,
-//     title: 'APP development',
-//     description:
-//       'Build and deploy your own mobile app projects on iOS and Android devices.',
-//   },
-// ];

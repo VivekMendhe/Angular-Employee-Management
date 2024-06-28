@@ -2,7 +2,7 @@
 
 .container {
   background-color: #e6f7e6;
-  height: calc(100vh - 64px);
+  /* height: calc(100vh - 64px); */
 }
 
 /* button {
@@ -44,4 +44,14 @@ button[type="submit"]:hover {
 
 .focus\:ring-green-400:focus {
   --tw-ring-color: #99cc99;
+}
+
+.toast-success {
+  background-color: green !important;
+  color: white !important;
+}
+
+.toast-error {
+  background-color: red !important;
+  color: white !important;
 }

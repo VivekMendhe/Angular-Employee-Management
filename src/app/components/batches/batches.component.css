@@ -3,6 +3,7 @@
 .container {
   background-color: #e6f7e6;
   height: calc(100vh - 64px);
+  transition: all 0.3s ease;
 }
 
 /* button {
@@ -44,4 +45,39 @@ button[type="submit"]:hover {
 
 .focus\:ring-green-400:focus {
   --tw-ring-color: #99cc99;
+}
+
+.transition-height {
+  transition: height 0.3s ease-in-out;
+}
+
+.bg-[e6f7e6] {
+  background-color: #e6f7e6;
+}
+
+.description {
+  transition: display 0.3s ease;
+}
+
+.fixed-arrow {
+  position: absolute;
+  bottom: 16px; /* Adjust this value as needed */
+  right: 16px; /* Adjust this value as needed */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.arrow-container {
+  position: relative;
+}
+
+.arrow-container button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.expanded {
+  height: 200px;
 }
